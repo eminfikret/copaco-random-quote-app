@@ -1,0 +1,36 @@
+.quote {
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    box-border
+    m-auto
+}
+
+.quote-text {
+  @apply
+    text-xl
+    md:text-2xl
+    lg:text-3xl
+    font-bold
+    w-4/5
+    m-auto
+    py-3
+    text-wrap
+    break-words
+    hyphens-auto
+    text-darkGray
+}
+
+.quote-author {
+  @apply
+    text-sm
+    md:text-base
+    lg:text-xl
+    py-3
+    text-wrap
+    break-words
+    hyphens-auto
+    text-darkGray
+}

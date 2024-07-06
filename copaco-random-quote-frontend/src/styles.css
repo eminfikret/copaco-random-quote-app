@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  @apply
+    h-full
+    w-full
+    text-darkGray
+    bg-darkGray
+    m-0
+    p-0
+}
+
+.icon-button {
+  @apply
+    bg-transparent
+    border-none
+    cursor-pointer
+    flex
+    items-center
+    justify-center
+}
+
+.icon-button mat-icon {
+  @apply
+    text-darkGray
+    hover:text-darkerGray
+}
+
+.icon-circle {
+  @apply
+    border-2
+    border-darkGray
+    rounded-full
+    p-2
+    align-middle
+}
+
+.error-popup-container {
+  .mat-mdc-snackbar-surface {
+    @apply
+      shadow-none
+  }
+}
+
+.success-popup-container {
+  .mat-mdc-snackbar-surface {
+    @apply
+      shadow-none
+  }
+}
