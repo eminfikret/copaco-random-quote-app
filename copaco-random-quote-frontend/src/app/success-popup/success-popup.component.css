@@ -1,0 +1,15 @@
+.success-popup {
+  @apply
+    flex
+    items-center
+    bg-green-100
+    text-green-800
+    p-4
+    rounded-lg
+}
+
+.success-popup mat-icon {
+  @apply
+    mr-2
+    text-green-800
+}

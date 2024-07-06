@@ -1,0 +1,16 @@
+.app-container {
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    h-screen
+    bg-darkGray
+    text-darkGray
+}
+
+.quote-container {
+  @apply
+    w-full
+    max-w-3xl
+}

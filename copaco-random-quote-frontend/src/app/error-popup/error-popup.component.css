@@ -1,0 +1,16 @@
+.error-popup {
+  @apply
+    flex
+    items-center
+    bg-yellow-100
+    text-orange-800
+    p-4
+    rounded-lg
+    m-auto
+}
+
+.error-popup mat-icon {
+  @apply
+    mr-2
+    bg-yellow-100
+}

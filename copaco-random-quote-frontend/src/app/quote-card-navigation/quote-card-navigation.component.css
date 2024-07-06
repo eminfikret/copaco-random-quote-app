@@ -1,0 +1,9 @@
+.quote-card-navigation {
+  @apply
+    flex
+    justify-around
+    box-border
+    w-4/5
+    m-auto
+    p-5
+}
