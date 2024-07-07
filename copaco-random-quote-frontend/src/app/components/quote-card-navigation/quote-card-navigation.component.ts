@@ -1,5 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {MatIcon} from "@angular/material/icon";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { Quote } from '../../models/quote/quote.model';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 @Component({
   selector: 'app-quote-card-navigation',
@@ -8,15 +11,24 @@ import {MatIcon} from "@angular/material/icon";
     MatIcon
   ],
   templateUrl: './quote-card-navigation.component.html',
-  styleUrl: './quote-card-navigation.component.css'
+  styleUrls: ['./quote-card-navigation.component.css']
 })
 export class QuoteCardNavigationComponent {
+  @Input() quote!: Quote;
   @Output() share = new EventEmitter<void>();
   @Output() like = new EventEmitter<void>();
   @Output() dislike = new EventEmitter<void>();
 
+  constructor(public dialog: MatDialog) {}
+
   onShare() {
-    this.share.emit();
+    const dialogRef = this.dialog.open(ShareDialogComponent, {
+      data: this.quote,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   onLike() {

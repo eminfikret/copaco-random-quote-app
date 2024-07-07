@@ -9,11 +9,15 @@ import {QuoteFallbackService} from "./services/quote-fallback/quote-fallback.ser
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, QuoteCardComponent, QuoteNavigationComponent],
+  imports: [
+    RouterOutlet,
+    QuoteCardComponent,
+    QuoteNavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  title: string = 'copaco-random-quote-frontend';
   currentQuote!: Quote;
   quotes: Quote[] = [];
   currentIndex: number = -1;

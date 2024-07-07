@@ -50,3 +50,14 @@ html, body {
       shadow-none
   }
 }
+
+div {
+  .mdc-dialog__container {
+    @apply
+    w-4/5
+    md:w-full
+    m-auto
+    bg-lightGray
+    rounded-lg
+  }
+}
