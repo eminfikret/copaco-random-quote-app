@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {NgIf} from "@angular/common";
@@ -16,6 +16,7 @@ import {NgIf} from "@angular/common";
   styleUrl: './quote-navigation.component.css'
 })
 export class QuoteNavigationComponent {
+  @Input() disableLeft: boolean = false;
   @Output() play = new EventEmitter<void>();
   @Output() stop = new EventEmitter<void>();
   @Output() navigateLeft = new EventEmitter<void>();
@@ -34,7 +35,9 @@ export class QuoteNavigationComponent {
   }
 
   onNavigateLeft() {
-    this.navigateLeft.emit();
+    if (!this.disableLeft) {
+      this.navigateLeft.emit();
+    }
   }
 
   onNavigateRight() {

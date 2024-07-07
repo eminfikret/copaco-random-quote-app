@@ -1,6 +1,6 @@
 <div class="quote-navigation">
   <div class="icon-circle" *ngIf="!isPlaying">
-    <button class="icon-button" (click)="onNavigateLeft()">
+    <button class="icon-button" [class.disabled]="disableLeft" (click)="onNavigateLeft()">
       <mat-icon>arrow_back</mat-icon>
     </button>
   </div>

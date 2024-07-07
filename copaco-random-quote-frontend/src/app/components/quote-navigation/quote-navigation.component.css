@@ -35,3 +35,15 @@
     text-darkGray
     hover:text-darkerGray
 }
+
+.icon-button.disabled {
+  @apply
+    opacity-50
+    cursor-default
+    pointer-events-none
+}
+
+.icon-button.disabled mat-icon {
+  @apply
+    text-gray-400;
+}

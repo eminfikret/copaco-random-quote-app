@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {QuoteCardComponent} from "./quote-card/quote-card.component";
-import {QuoteNavigationComponent} from "./quote-navigation/quote-navigation.component";
-import {InternetStatusService} from "./services/internet-status.service";
+import {QuoteCardComponent} from "./components/quote-card/quote-card.component";
+import {QuoteNavigationComponent} from "./components/quote-navigation/quote-navigation.component";
+import {InternetStatusService} from "./services/internet-status/internet-status.service";
+import {Quote} from "./models/quote/quote.model";
+import {QuoteFallbackService} from "./services/quote-fallback/quote-fallback.service";
 
 @Component({
   selector: 'app-root',
@@ -11,27 +13,68 @@ import {InternetStatusService} from "./services/internet-status.service";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'copaco-random-quote-frontend';
+export class AppComponent implements OnInit {
+  currentQuote!: Quote;
+  quotes: Quote[] = [];
+  currentIndex: number = -1;
+  isPlaying: boolean = false;
 
-  constructor(private internetStatusService: InternetStatusService) {}
+  constructor(
+    private quoteFallbackService: QuoteFallbackService,
+    private internetStatusService: InternetStatusService
+  ) {}
 
-  quotes = [
-    { text: 'Be who you are and say what you feel, because those who mind don\'t matter, and those who matter don\'t mind.', author: 'Bernard M. Baruch' },
-    { text: 'Do what you can, with what you have, where you are.', author: 'Theodore Roosevelt' },
-    { text: 'To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.', author: 'Ralph Waldo Emerson' }
-  ];
-  currentQuoteIndex = 0;
-
-  get currentQuote() {
-    return this.quotes[this.currentQuoteIndex];
+  ngOnInit(): void {
+    this.getQuote();
   }
 
-  slideLeft() {
-    this.currentQuoteIndex = (this.currentQuoteIndex - 1 + this.quotes.length) % this.quotes.length;
+  getQuote(): void {
+    this.quoteFallbackService.getQuote().subscribe({
+      next: quote => {
+        this.quotes.push(quote);
+        this.currentIndex = this.quotes.length - 1;
+        this.currentQuote = this.quotes[this.currentIndex];
+      },
+      error: err => {
+        console.error(err);
+        this.currentQuote = { text: 'No quotes available', author: '' };
+      }
+    });
   }
 
-  slideRight() {
-    this.currentQuoteIndex = (this.currentQuoteIndex + 1) % this.quotes.length;
+  slideLeft(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.currentQuote = this.quotes[this.currentIndex];
+    }
+  }
+
+  slideRight(): void {
+    if (this.currentIndex < this.quotes.length - 1) {
+      this.currentIndex++;
+      this.currentQuote = this.quotes[this.currentIndex];
+    } else {
+      this.getQuote();
+    }
+  }
+
+  onPlay(): void {
+    this.isPlaying = true;
+    this.autoSlideRight();
+  }
+
+  onStop(): void {
+    this.isPlaying = false;
+  }
+
+  private autoSlideRight(): void {
+    if (this.isPlaying) {
+      this.slideRight();
+      setTimeout(() => this.autoSlideRight(), 5000);
+    }
+  }
+
+  get disableLeftNavigation(): boolean {
+    return this.currentIndex <= 0;
   }
 }
