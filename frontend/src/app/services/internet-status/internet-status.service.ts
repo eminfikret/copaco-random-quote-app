@@ -25,7 +25,7 @@ export class InternetStatusService {
     const component = type === 'error' ? ErrorPopupComponent : SuccessPopupComponent;
     this.snackBar.openFromComponent(component, {
       data: { message },
-      duration: 50000,
+      duration: 5000,
       panelClass: type === 'error' ? 'error-popup-container' : 'success-popup-container',
       horizontalPosition: 'center',
       verticalPosition: 'top'
