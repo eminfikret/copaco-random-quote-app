@@ -1,0 +1,36 @@
+.share-dialog {
+  @apply
+    p-6
+    shadow-lg
+    bg-lightGray
+}
+
+.share-dialog h2 {
+  @apply
+  text-xl
+  font-semibold
+  mb-4
+}
+
+.share-dialog p {
+  @apply
+  my-10
+}
+
+.share-buttons {
+  @apply
+  grid
+  grid-cols-2
+  gap-4
+  mb-4
+}
+
+.btn-icon {
+  @apply
+  bg-darkGray
+  text-lightGray
+  py-2
+  px-4
+  rounded-lg
+}
+

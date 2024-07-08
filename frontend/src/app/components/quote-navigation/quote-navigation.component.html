@@ -1,0 +1,22 @@
+<div class="quote-navigation">
+  <div class="icon-circle" *ngIf="!isPlaying">
+    <button class="icon-button" [class.disabled]="disableLeft" (click)="onNavigateLeft()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!isPlaying">
+    <button class="icon-button" (click)="onPlay()">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </div>
+  <div class="icon-circle" *ngIf="!isPlaying">
+    <button class="icon-button" (click)="onNavigateRight()">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+  <div class="icon-circle" *ngIf="isPlaying">
+    <button class="icon-button" (click)="onStop()">
+      <mat-icon>stop</mat-icon>
+    </button>
+  </div>
+</div>
